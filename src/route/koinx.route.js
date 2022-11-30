@@ -1,12 +1,12 @@
 import express from "express";
-import { getAllKoinx, getAllTransByAdd } from "../controller/koinx.controller.js";
+import { fetchBalance, getAllTransByAdd } from "../controller/koinx.controller.js";
 
 const koinxRoute = express.Router();
 
-koinxRoute.route('/')
-    .get(getAllKoinx)
+koinxRoute.route('/fetch/:id')
+    .get(fetchBalance);
 
 koinxRoute.route('/transaction/:id')
-    .get(getAllTransByAdd)
+    .get(getAllTransByAdd);
 
 export default koinxRoute;
