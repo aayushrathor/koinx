@@ -56,4 +56,4 @@ GET /api/fetch/:id
 ```
 
 ## Usage Video
-[![Usage Video](https://youtu.be/lZRQrFHI67w)
+https://youtu.be/lZRQrFHI67w
