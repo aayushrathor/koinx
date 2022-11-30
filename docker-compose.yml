@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  nodeapp:
+    build: .
+    ports:
+      - 8080:8080
+    container_name: nodeapp
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
