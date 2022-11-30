@@ -25,5 +25,6 @@ app.all('*', (req, res) => {
 etherloop;
 
 app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
     logger.info(`ServerInfo: Server started and running on http://localhost:${PORT}`);
 })
