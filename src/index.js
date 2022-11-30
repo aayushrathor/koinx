@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import koinxRoute from "./route/koinx.route.js";
 import path from "path";
+import etherloop from "./controller/ethereum.controller.js";
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ app.get('/', (req, res) => {
 app.all('*', (req, res) => {
     res.status(404).send('<h1>404! Page not found</h1>');
 });
+
+etherloop;
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

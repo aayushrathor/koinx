@@ -6,7 +6,7 @@ const koinxRoute = express.Router();
 koinxRoute.route('/')
     .get(getAllKoinx)
 
-koinxRoute.route('/:id')
+koinxRoute.route('/transaction/:id')
     .get(getAllTransByAdd)
 
 export default koinxRoute;
