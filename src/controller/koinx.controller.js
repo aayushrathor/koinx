@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import logger from "../utils/koinx.logger.js";
 import db from "../config/koinx.mongo.js";
 
 dotenv.config();
@@ -27,6 +28,7 @@ export const fetchBalance = async (req, res) => {
     const ethereum_rate = await db.collection('ethereumData').findOne({ ethereum: { $exists: true } });
 
     res.status(200).json({ address: req.params.id, balance: balance, ethereum_rate: ethereum_rate.ethereum.inr });
+    logger.info(`FetchBalance: Balance of ${req.params.id} fetched successfully`);
 }
 
 export const getAllTransByAdd = async (req, res) => {
@@ -36,13 +38,14 @@ export const getAllTransByAdd = async (req, res) => {
     if (db.readyState === 1) {
         if (db.collection('cryptoAddressData').name === 'cryptoAddressData' && await db.collection('cryptoAddressData').countDocuments({ address: req.params.id }) === 1) {
             await db.collection('cryptoAddressData').updateOne({ address: req.params.id }, { $set: { transactions: data.result } });
-            console.log('Transaction list updated');
+            logger.info(`GetAllTransactionsByAddress: Transactions of ${req.params.id} updated successfully`);
         } else {
             await db.collection('cryptoAddressData').insertOne({ address: req.params.id, transactions: data.result });
-            console.log('Transaction list added');
+            logger.info(`GetAllTransactionsByAddress: Transactions of ${req.params.id} inserted successfully`);
         }
         res.send(data);
     } else {
         res.status(500).send({ message: "Error connecting to database" });
+        logger.error("MongoDB: Error connecting to database");
     }
 }

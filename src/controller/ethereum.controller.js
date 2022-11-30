@@ -1,5 +1,6 @@
 import request from "request";
 import db from "../config/koinx.mongo.js";
+import logger from "../utils/koinx.logger.js";
 
 var etherloop = setInterval(function () {
     request({
@@ -15,14 +16,14 @@ var etherloop = setInterval(function () {
                 let inr_price = await db.collection('ethereumData').findOne({ ethereum: { $exists: true } });
                 if (db.collection('ethereumData').name === 'ethereumData') {
                     await db.collection('ethereumData').updateOne({ "ethereum": { "inr": inr_price.ethereum.inr } }, { $set: { "ethereum": { "inr": data.ethereum.inr } } });
-                    console.log('ethereum price updated');
+                    logger.info(`Ethereum: Ethereum rate updated successfully`);
                 }
             } else {
-                console.log('Error connecting to database');
+                logger.error("MongoDB Ethereum: Error connecting to database");
             }
-            console.log(data);
+            logger.info("EthereumRate: Ethereum rate - ", data)
         } else {
-            console.log(error);
+            logger.info("EthereumRate: Error fetching Ethereum rate - ", error);
         }
     });
 }, 100000);
