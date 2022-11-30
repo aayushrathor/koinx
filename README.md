@@ -41,6 +41,9 @@ $ npm run start:dev
 
 # start the server
 $ npm run start:prod
+
+# use docker
+$ docker compose up -d
 ```
 
 ## API Endpoints
@@ -53,4 +56,4 @@ GET /api/fetch/:id
 ```
 
 ## Usage Video
-![Usage Video](https://github.com/aayushrathor/koinx/blob/main/assests/2022-11-30_20-19-56.mp4)
+![Usage Video](https://youtu.be/lZRQrFHI67w)
